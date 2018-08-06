@@ -1,0 +1,44 @@
+.main {
+  display: flex;
+}
+
+.sidebar {
+  background-color: grey;
+  width: 20%;
+  height: 100vh;
+}
+
+.navMap {
+  width: 80%;
+  height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.navbar {
+  background-color: grey;
+  width: 100%;
+  height: 5vh;
+}
+
+#map {
+  background-color: pink;
+  width: 100%;
+  height: 95vh;
+}
+
+.filter {
+  margin-top: 3%;
+  margin-left: 5%;
+}
+
+.venueList {
+  list-style-type: none;
+  color: white;
+  line-height: 3;
+}
+
+h1 {
+  margin-left: 6%;
+  color: white;
+}
