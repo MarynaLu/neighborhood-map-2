@@ -2,15 +2,57 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import GoogleMapReact from 'google-map-react';
-import Map from './map.js';
+import MapContainer from './map.js';
 import escapeRegExp from 'escape-string-regexp'
 
 class App extends Component {
+  constructor(props){
+        super(props);
 
-  state = {
-    venues: [],
-    query: ''
-  };
+        this.onMapClicked = this.onMapClicked.bind(this);
+        this.onMarkerClick = this.onMarkerClick.bind(this);
+
+        this.state = {
+            venues: [],
+            query: '',
+            showingInfoWindow: false,
+            showingInfoWindow2: true,
+            activeMarker: {},
+            selectedPlace: {},
+            clickedMarker: []
+          };
+   };
+
+  
+
+onMarkerClick = (props, marker, e) => {
+  this.setState({
+    selectedPlace: props,
+    activeMarker: marker,
+    showingInfoWindow: true
+  });
+console.log(marker)
+}
+
+onMapClicked = (props) => {
+  if(this.state.showingInfoWindow) {
+    this.setState({
+      showingInfoWindow: false,
+      activeMarker: null
+    })
+  }
+};
+
+nameClicked = (name, index) => {
+  
+  let markers = [...document.querySelectorAll('.gmnoprint')]
+  
+ 
+  if (document.querySelector('.Map-container')) {
+      markers[0].click()
+    }
+
+  }
 
  updateQuery = (query) => {
       this.setState({query: query.trim()})
@@ -42,6 +84,8 @@ class App extends Component {
 
   render() {
     const { query } = this.state
+    const { onMarkerClicked } = this.props
+    
 
     let showingVenues
     if (query){
@@ -62,8 +106,8 @@ class App extends Component {
               onChange={(event) => this.updateQuery(event.target.value)}/>
             
             <ul className="venueList">
-              {showingVenues.map(venue => (
-                <li key={venue.venue.name}>
+              {showingVenues.map((venue, index) => (
+                <li key={venue.venue.name} onClick={(event) => this.nameClicked(venue.venue.name, index)}>
                   {venue.venue.name}
                 </li>
                 ))
@@ -74,7 +118,16 @@ class App extends Component {
         <div className="navMap">
           <nav className="navbar"></nav>
 
-          <Map venues={showingVenues} />
+          <MapContainer venues={showingVenues}
+            onMapClicked={this.onMapClicked}
+            onMarkerClick={this.onMarkerClick}
+            activeMarker={this.state.activeMarker}
+            showingInfoWindow={this.state.showingInfoWindow}
+            showingInfoWindow2={this.state.showingInfoWindow2}
+            selectedPlace={this.state.selectedPlace}
+            clickedMarker={this.state.clickedMarker}
+            nameClicked={this.nameClicked}
+           />
 
         </div>
       </div>
