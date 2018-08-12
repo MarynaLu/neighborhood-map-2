@@ -10,12 +10,13 @@
 
 .navMap {
   width: 80%;
-  height: 94vh;
+  height: 100vh;
 }
 
 .navbar {
   background-color: grey;
-  height: 6vh;
+  display: none;
+   /* height: 8vh;  */
 }
 
 .map {
@@ -39,4 +40,126 @@
 h1 {
   margin-left: 6%;
   color: white;
+  text-transform: uppercase;
 }
+
+.fas {
+    padding-left: 2%;
+    padding-top: 1%;
+    color: #A9A9A9;
+}
+
+.fas:hover {
+  color: white;
+}
+
+.navTitle {
+  display:none;
+}
+
+#bars {
+  color:black;
+  margin-right: 23%;
+}
+
+#foursquare {
+  font-size: 10px;
+  margin-left: 6%;
+}
+
+@media only screen and (min-width: 601px) and (max-width: 736px){
+  .sidebar {
+    width:40%;
+  }
+
+  .navMap {
+    width:60%;
+  }
+  .filter {
+    margin-left: 20%;
+  }
+
+  .venueList{
+    margin-left: 7%;
+  }
+
+  h1 {
+    font-size: 22px;
+    margin-left: 22%;
+    text-transform: uppercase;
+  }
+
+  .navBar {
+    display: none;
+  }
+
+}
+
+@media only screen and (min-width: 737px) and (max-width: 961px) {
+  .sidebar {
+    width:40%;
+  }
+
+  .navMap {
+    width:60%;
+  }
+
+ .filter {
+    margin-left: 20%;
+  }
+
+  h1 {
+   margin-left: 4%;
+  }
+
+.venueList {
+    margin-left: 10%;
+    font-size: 19px;
+  }
+
+  .navBar {
+    display: none;
+  }
+
+}
+
+
+
+
+@media only screen and (max-width: 600px) {
+  .sidebar {
+    display: none;
+  }
+
+  .open {
+    /* transform: translateX(-200px); */
+    display: inline-block;
+    width: 100vh;
+    /* margin-top: 8vh; */
+    height: 100vh;
+  }
+
+  .navMap {
+    width: 100%;
+    height: 100%;
+  }
+
+  .fas {
+      padding-top: 0;
+      font-color: #A9A9A9;
+      font-size: 1em;
+      margin-top: 3%;
+  }
+
+  .navTitle {
+    display:inline;
+    font-size: 19px;
+    margin-top: 3%;
+  }
+
+  .navbar {
+    width: 100%;
+    height: 8vh;
+    display: inline-block;
+  }
+  }
