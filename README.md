@@ -1,4 +1,4 @@
-#Bialystok Restaurants
+# Bialystok Restaurants
 This is a single page application which allows to search for local restaurants in Bialystok, Poland. This project is part of Udacity FEND Nanodegree (Project 8).
 
 ## How to run this application
