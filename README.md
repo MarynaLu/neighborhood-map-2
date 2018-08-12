@@ -11,7 +11,7 @@ In order to run this application:
 
 
 ## Dependancies
-This project has been bootstrapped with [Create React App](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md]. This project uses [Google Maps API](https://cloud.google.com/maps-platform/), [react-google-maps library](https://github.com/tomchentw/react-google-maps), [Font Awesome](https://fontawesome.com/), and [Foursquare API](https://developer.foursquare.com/places-api].
+This project has been bootstrapped with [Create React App](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md). This project uses [Google Maps API](https://cloud.google.com/maps-platform/), [react-google-maps library](https://github.com/tomchentw/react-google-maps), [Font Awesome](https://fontawesome.com/), and [Foursquare API](https://developer.foursquare.com/places-api).
 
 
 
