@@ -19,25 +19,22 @@ class App extends Component {
             showingInfoWindow: false,
             activeMarker: {},
             selectedPlace: {},
-            animation: 0
+            animation: 0,
+            foursquareFailedToLoad: false,
+            mapsFailedToLoad: false
             
           };
    };
 
+  //save all markers into an array for the future use
   allMarkers = [];
   addMarker = marker => {
     if (marker) {
       this.allMarkers.push(marker);
-      //add tab index
-      this.allMarkers.map(marker => marker.tabIndex = "-1");
-      this.allMarkers.map(marker => marker.role = "button");
-      this.allMarkers.map(marker => marker.ariaLabel = marker.props.name);
-      console.log(this.allMarkers);
-      console.log(marker);
     }
   };
 
-
+//show infowindow on marker click
 onMarkerClick = (props, marker, e) => {
   this.setState({
     selectedPlace: props,
@@ -47,6 +44,7 @@ onMarkerClick = (props, marker, e) => {
   });
 }
 
+//hide infowindow on map click
 onMapClicked = (props) => {
   if(this.state.showingInfoWindow) {
     this.setState({
@@ -57,6 +55,7 @@ onMapClicked = (props) => {
   }
 };
 
+//show infowindow and animate marker on the list element click
 nameClicked = (event) => {
   const clicked = this.allMarkers.filter(
       el => el.marker.name === event.target.textContent
@@ -70,6 +69,7 @@ nameClicked = (event) => {
     })
   }
 
+//stop animation and hide infowindow once it's closed
 infoWindowClosed = () => {
   console.log("closed");
   this.setState({
@@ -78,20 +78,21 @@ infoWindowClosed = () => {
   });
 };
 
-  showNav = (event) => {
+//hide navigation upon hamburger click
+showNav = (event) => {
     
-    var sidebar = document.getElementsByClassName('sidebar')[0];
-    var navMap = document.getElementsByClassName('navMap')[0];
-    sidebar.classList.toggle("open");
-  }
+  var sidebar = document.getElementsByClassName('sidebar')[0];
+  var navMap = document.getElementsByClassName('navMap')[0];
+  sidebar.classList.toggle("open");
+}
   
+//update query in the state on user input
+updateQuery = (query) => {
+    this.setState(
+      {query: query.trim(),
 
- updateQuery = (query) => {
-      this.setState(
-        {query: query.trim(),
-
-        })
-    }
+      })
+  }
 
 //getting a list of venues from Foursquare API
   componentDidMount() {
@@ -111,14 +112,22 @@ infoWindowClosed = () => {
       method: 'GET'
     }).then(response => response.json()).then(response => {
       setVenueState({venues: response.response.groups[0].items});
+    })
+    .catch(error => {
+      console.log(error);
+      alert("We're sorry, the application didn't load correctly. Please refresh the page.")
+      this.setState({foursquareFailedToLoad: true});
     });
+
+    //Google API failed to load
+    window.gm_authFailure = () => this.setState({ mapsFailedToLoad: true });
 }
 
 
   render() {
     const { query } = this.state
     const { onMarkerClicked } = this.props
-    
+    const mapLoaded = !this.state.mapsFailedToLoad
 
     let showingVenues
     if (query){
@@ -142,7 +151,7 @@ infoWindowClosed = () => {
             <ul className="venueList">
               {showingVenues.map((venue, index) => (
                 <li key={venue.venue.name}
-                aria-label={venue.venue.name}
+                aria-label={venue.venue.name + " " + (venue.venue.location.address ? venue.venue.location.address : "no address available")}
                 role="button"
                 tabIndex="0"
                 onClick={(event) => this.nameClicked(event)}>
@@ -157,7 +166,8 @@ infoWindowClosed = () => {
           <nav className="navbar">
             <i onClick={(event) => this.showNav(event)} id="bars" className="fas fa-bars fa-2x"></i>
           </nav>
-
+          
+          {mapLoaded ? (
           <MapContainer venues={showingVenues}
             onMapClicked={this.onMapClicked}
             onMarkerClick={this.onMarkerClick}
@@ -173,6 +183,10 @@ infoWindowClosed = () => {
             appState={this.state}
             infoWindowClosed={this.infoWindowClosed}
            />
+          ) : (
+            <div><img className="sadFace" src="https://cdn.pixabay.com/photo/2016/09/01/08/25/smiley-1635454_960_720.png"/><p className="error">We're sorry. The application couldn't be loaded. Please refresh the page</p></div>
+          )}
+
         </div>
       </div>
     );

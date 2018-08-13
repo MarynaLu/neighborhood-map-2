@@ -19,7 +19,7 @@ export class MapContainer extends Component {
 render() {
 	const {nameClicked, onMapClicked,  infoWindowClosed, onMarkerClick, addMarker, activeMarker, venueName, showingInfoWindow, clickedMarker, selectedPlace } = this.props
 	return (
-		<div style={{width:'100%', position:'relative', height:'100%'}}>
+		<div aria-hidden="true" style={{width:'100%', position:'relative', height:'100%'}}>
 			<Map 
 				onClick={onMapClicked}
 				google={this.props.google}
@@ -35,6 +35,7 @@ render() {
 				return(
 					<Marker
 						onClick={onMarkerClick}
+						aria-hidden="true"
 						className="markers"
 						title={venue.venue.name}
 						key={venue.venue.id}
@@ -60,13 +61,14 @@ render() {
 				})}
 			
 			<InfoWindow
+				aria-hidden="true"
 				marker={activeMarker}
 				visible={showingInfoWindow}
 				onClose={infoWindowClosed}
 				>
 				<div>
-					<p tabIndex="0"><strong>{this.props.appState.activeMarker.name}</strong></p>
-					<p tabIndex="0">{this.props.appState.activeMarker.address? this.props.appState.activeMarker.address : "no adress available"}</p>
+					<p><strong>{this.props.appState.activeMarker.name}</strong></p>
+					<p>{this.props.appState.activeMarker.address? this.props.appState.activeMarker.address : "no adress available"}</p>
 				</div>
 			</InfoWindow>
 
