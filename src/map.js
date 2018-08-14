@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 /*import GoogleMapReact from 'google-map-react';*/
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
@@ -7,17 +6,8 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
 export class MapContainer extends Component {
 
-
-/*static defaultProps = {
-    center: {
-      lat: 53.1305,
-      lng: 23.1592
-    },
-    zoom: 15,
-  };
-*/
 render() {
-	const {nameClicked, onMapClicked,  infoWindowClosed, onMarkerClick, addMarker, activeMarker, venueName, showingInfoWindow, clickedMarker, selectedPlace } = this.props
+	const {onMapClicked, infoWindowClosed, onMarkerClick, addMarker, activeMarker, showingInfoWindow} = this.props
 	return (
 		<div aria-hidden="true" style={{width:'100%', position:'relative', height:'100%'}}>
 			<Map 
@@ -41,11 +31,6 @@ render() {
 						key={venue.venue.id}
 						id={venue.venue.id}
 						name={venue.venue.name}
-						icon={{
-		                    path: this.props.google.maps.SymbolPath.PIN,
-		                    scale: 8
-                  		}}
-               
                   		 position={{
 			                  lat: venue.venue.location.lat,
 			                  lng: venue.venue.location.lng }}

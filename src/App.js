@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import MapContainer from './map.js';
 import escapeRegExp from 'escape-string-regexp'
 
@@ -82,7 +81,6 @@ infoWindowClosed = () => {
 showNav = (event) => {
     
   var sidebar = document.getElementsByClassName('sidebar')[0];
-  var navMap = document.getElementsByClassName('navMap')[0];
   sidebar.classList.toggle("open");
 }
   
@@ -126,7 +124,6 @@ updateQuery = (query) => {
 
   render() {
     const { query } = this.state
-    const { onMarkerClicked } = this.props
     const mapLoaded = !this.state.mapsFailedToLoad
 
     let showingVenues
@@ -184,7 +181,7 @@ updateQuery = (query) => {
             infoWindowClosed={this.infoWindowClosed}
            />
           ) : (
-            <div><img className="sadFace" src="https://cdn.pixabay.com/photo/2016/09/01/08/25/smiley-1635454_960_720.png"/><p className="error">We're sorry. The application couldn't be loaded. Please refresh the page</p></div>
+            <div><img className="sadFace" alt="sad face" src="https://cdn.pixabay.com/photo/2016/09/01/08/25/smiley-1635454_960_720.png"/><p className="error">We're sorry. The application couldn't be loaded. Please refresh the page</p></div>
           )}
 
         </div>
