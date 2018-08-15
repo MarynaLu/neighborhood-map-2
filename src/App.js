@@ -139,7 +139,7 @@ updateQuery = (query) => {
         <div className="sidebar">
             <h1>Bialystok Restaurants</h1>
             <p id="foursquare">Data from <a href="https://foursquare.com">Foursquare</a></p>
-            <input ariaLabel="Search filter" className="filter" 
+            <input aria-label="Search filter" className="filter" 
               type="text"
               placeholder="Filter restaurants"
               value={this.state.query}
